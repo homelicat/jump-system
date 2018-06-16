@@ -1,0 +1,79 @@
+
+mov     dx,1f6h         ;Drive and head port
+mov     al,0a0h         ;Drive 0, head 0
+out     dx,al
+
+mov     dx,1f2h         ;Sector count port
+mov     al,1            ;Read one sector
+out     dx,al
+
+mov     dx,1f3h         ;Sector number port
+mov     al,1            ;Read sector one
+out     dx,al
+
+mov     dx,1f4h         ;Cylinder low port
+mov     al,0            ;Cylinder 0
+out     dx,al
+
+mov     dx,1f5h         ;Cylinder high port
+mov     al,0            ;The rest of the cylinder 0
+out     dx,al
+
+mov     dx,1f7h         ;Command port
+mov     al,20h          ;Read with retry.
+out     dx,al
+
+still_going:
+in      al,dx
+test    al,8            ;This means the sector buffer requires
+           ;servicing.
+jz      still_going     ;Don't continue until the sector buffer
+            ;is ready.
+
+mov     cx,100h        ;One sector /2
+push 00
+push 00
+pop es
+pop ds
+mov     di,1000h
+mov     dx,1f0h         ;Data port - data comes in and out of here.
+rep     insw
+
+MOV DX, 1F7h ;status register
+LOOP1:
+IN AL, DX ;sets AL to status register (which is 8 bits)
+
+AND AL, 10000000xB
+JNE LOOP1
+
+CLI
+
+MOV DX, 1F7h ;status register again
+LOOP2:
+IN AL, DX ;sets AL to status register again
+
+AND AL, 01000000xB
+JE LOOP2
+
+MOV DX, 1F6h ;device/head register
+MOV AL, 0 ;0 selects device 0 (master). 10h would select device 1 (slave).
+OUT DX, AL ;selects master device
+
+MOV DX, 1F7h ;command register
+MOV AL, 0ECh ;"IDENTIFY DRIVE" command
+OUT DX, AL ;sends the command!
+
+MOV DX, 1F7h ;status register
+LOOP3:
+IN AL, DX
+
+AND AL, 00001000xB ;if DRQ is not high, the device doesn't have data for us
+JE LOOP3 ;yet, so keep looking until it does!
+
+MOV DX, 1F0h ;data register
+MOV DI, OFFSET buff ;points DI to the buffer we're using
+MOV CX, 256 ;256 decimal. This controls the REP command.
+CLD ;clear the direction flag so INSW increments DI (not decrements it)
+REP INSW
+
+STI

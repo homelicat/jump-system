@@ -1,0 +1,19 @@
+dw 0012h,0011h
+db 0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh
+db 0ffh,0ffh,0ffh,0ffh,0ffh,000h,000h,000h,000h,000h,000h,000h,000h,0ffh,0ffh,0ffh,0ffh,0ffh
+db 0ffh,0ffh,0ffh,000h,000h,088h,088h,088h,088h,088h,088h,088h,088h,000h,000h,0ffh,0ffh,0ffh
+db 0ffh,0ffh,0ffh,000h,088h,088h,088h,088h,088h,088h,088h,088h,088h,088h,000h,0ffh,0ffh,0ffh
+db 0ffh,0ffh,000h,088h,088h,088h,088h,088h,088h,088h,088h,088h,088h,088h,088h,000h,0ffh,0ffh
+db 0ffh,0ffh,000h,088h,000h,000h,000h,088h,088h,088h,088h,000h,000h,000h,088h,000h,0ffh,0ffh
+db 0ffh,000h,088h,000h,000h,000h,000h,000h,088h,088h,000h,000h,000h,000h,000h,088h,000h,0ffh
+db 0ffh,000h,088h,000h,000h,000h,000h,000h,088h,088h,000h,000h,000h,000h,000h,088h,000h,0ffh
+db 0ffh,000h,088h,000h,000h,000h,000h,000h,088h,088h,000h,000h,000h,000h,000h,088h,000h,0ffh
+db 0ffh,000h,088h,088h,000h,000h,000h,088h,088h,088h,088h,000h,000h,000h,088h,088h,000h,0ffh
+db 0ffh,0ffh,000h,088h,088h,088h,088h,088h,000h,000h,088h,088h,088h,088h,088h,000h,0ffh,0ffh
+db 0ffh,0ffh,0ffh,000h,088h,088h,088h,088h,000h,000h,088h,088h,088h,088h,000h,0ffh,0ffh,0ffh
+db 0ffh,0ffh,0ffh,0ffh,000h,088h,088h,088h,088h,088h,088h,088h,088h,000h,0ffh,0ffh,0ffh,0ffh
+db 0ffh,0ffh,0ffh,0ffh,000h,088h,088h,000h,088h,088h,000h,088h,088h,000h,0ffh,0ffh,0ffh,0ffh
+db 0ffh,0ffh,0ffh,0ffh,000h,088h,088h,000h,088h,088h,000h,088h,088h,000h,0ffh,0ffh,0ffh,0ffh
+db 0ffh,0ffh,0ffh,0ffh,0ffh,000h,000h,000h,000h,000h,000h,000h,000h,0ffh,0ffh,0ffh,0ffh,0ffh
+db 0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh,0ffh
+times (1024-($-$$)) db 00h
